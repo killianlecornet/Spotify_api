@@ -6,13 +6,17 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 // Middleware CORS pour gérer les problèmes de cross-origin
 app.use(cors());
 
 // Middleware pour traiter le corps des requêtes au format JSON
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur votre API !');
+});
 
 // Routes de l'API
 app.use('/api', require('./routes/api'));
