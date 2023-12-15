@@ -6,6 +6,9 @@ const router = express.Router();
 // Récupérer toutes les musiques
 router.get('/', musicController.getAllMusics);
 
+// Récupérer toutes les musiques
+router.get('/artists', musicController.getAllArtists);
+
 // Rechercher des musiques par artiste
 router.get('/search', async (req, res) => {
     try {

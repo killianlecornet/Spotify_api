@@ -10,6 +10,15 @@ exports.getAllMusics = async (req, res) => {
     }
 };
 
+exports.getAllArtists = async (req, res) => {
+    try {
+        const musics = await Music.find({}).distinct('artist');
+        res.json(musics);
+    } catch (error) {
+        res.status(500).send("Erreur lors de la récupération des artistes : " + error.message);
+    }
+}
+
 // Récupérer une musique spécifique par ID
 exports.getMusic = async (req, res) => {
     try {
