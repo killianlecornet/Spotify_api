@@ -1,7 +1,6 @@
 // albumRoutes.js
 const express = require('express');
 const albumController = require('../controllers/albumController');
-const Album = require('../models/album');
 const router = express.Router();
 
 // Récupérer tous les albumes

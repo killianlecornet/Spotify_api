@@ -2,22 +2,37 @@ const Album = require('../models/album');
 
 exports.getAllAlbums = async (req, res) => {
     try {
-        const albums = await Album.find().populate('artist');
+        const albums = await Album.find().populate('artist').populate('music');
         res.json(albums);
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
 
+// Modifiez la fonction getAlbum dans votre contrôleur
 exports.getAlbum = async (req, res) => {
-    // Logique pour récupérer un album par ID
     try {
-        const album = await Album.findById(req.params.id).populate('artist');
+        // Utilisez populate pour inclure les détails de l'artiste et des musiques associées
+        const album = await Album.findById(req.params.id)
+            .populate({
+                path: 'music',
+                populate: {
+                    path: 'artist',
+                    model: 'Artist'
+                }
+            });
+
+        if (!album) {
+            return res.status(404).json({ message: 'Album non trouvé' });
+        }
+
         res.json(album);
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
+
+
 
 exports.addAlbum = async (req, res) => {
     // Logique pour ajouter un nouvel album
