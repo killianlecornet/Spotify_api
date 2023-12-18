@@ -15,11 +15,10 @@ exports.getAlbum = async (req, res) => {
         // Utilisez populate pour inclure les détails de l'artiste et des musiques associées
         const album = await Album.findById(req.params.id)
             .populate({
-                path: 'music',
-                populate: {
-                    path: 'artist',
-                    model: 'Artist'
-                }
+                path: 'music'
+            })
+            .populate({
+                path: 'artist'
             });
 
         if (!album) {
