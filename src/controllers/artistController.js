@@ -12,7 +12,7 @@ exports.getAllArtists = async (req, res) => {
 exports.getArtist = async (req, res) => {
     // Logique pour récupérer un artiste par ID
     try {
-        const artist = await Artist.findById(req.params.id);
+        const artist = await Artist.findById(req.params.id).populate('albums').populate('music');
         res.json(artist);
     } catch (error) {
         res.status(500).send(error.message);
@@ -43,7 +43,7 @@ exports.updateArtist = async (req, res) => {
 exports.deleteArtist = async (req, res) => {
     // Logique pour supprimer un artiste par ID
     try {
-        const deletedArtist = await Artist.findByIdAndDelete(req.params.id);
+        const deletedArtist = await Artist.findByIdAndDelete(req.params.id).populate('albums').populate('music');
         res.json(deletedArtist);
     } catch (error) {
         res.status(500).send(error.message);
