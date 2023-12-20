@@ -5,6 +5,7 @@ const musicRoutes = require('./src/routes/musicRoutes');
 const artistRoutes = require('./src/routes/artistRoutes');
 const albumRoutes = require('./src/routes/albumRoutes');
 const playlistRoutes = require('./src/routes/playlistRoutes');
+const searchRoutes = require('./src/routes/searchRoutes');
 
 // Connexion à la base de données
 connectDB();
@@ -22,6 +23,7 @@ app.use('/api/musics', musicRoutes);
 app.use('/api/artist', artistRoutes);
 app.use('/api/album', albumRoutes);
 app.use('/api/playlist', playlistRoutes);
+app.use('/api/search', searchRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
