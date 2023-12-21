@@ -31,18 +31,28 @@ exports.getPlaylist = async (req, res) => {
     }
 };
 
-
-
 exports.addPlaylist = async (req, res) => {
-    // Logique pour ajouter un nouvel playlist
     try {
-        const newPlaylist = new Playlist(req.body);
-        await newPlaylist.save();
-        res.json(newPlaylist);
+        const { title, imageUrl, description, music } = req.body;
+
+        const newPlaylist = new Playlist({
+            title,
+            imageUrl,
+            description,
+            music
+        });
+
+        const savedPlaylist = await newPlaylist.save();
+
+        res.json(savedPlaylist);
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
+
+
+
+
 
 exports.updatePlaylist = async (req, res) => {
     // Logique pour mettre à jour un playlist par ID
