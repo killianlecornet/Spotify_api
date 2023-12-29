@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', musicController.getAllMusics);
 
 // Récupérer toutes les musiques
-router.get('/artists', musicController.getAllArtists);
+router.get('/latest', musicController.getLatestMusics);
 
 // Récupérer une musique spécifique par ID
 router.get('/:id', musicController.getMusic);
