@@ -18,7 +18,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "https://spotify-front-liard.vercel.app", // Remplacez par l'URL de votre front-end
+        origin: process.env.FRONTEND_URL, // Remplacez par l'URL de votre front-end
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
@@ -44,6 +44,7 @@ let playbackState = { currentTime: 0 }; // L'état de lecture actuel (position d
 
 // Gestion des connexions WebSocket
 io.on('connection', (socket) => {
+    console.log('Un utilisateur est connecté');
 
     // Envoyer l'état actuel de la musique et de lecture au client qui vient de se connecter
     if (currentTrack) {
@@ -70,8 +71,9 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
+        console.log('Un utilisateur est déconnecté');
     });
 });
 
 const PORT = process.env.PORT || 3001;
-server.listen(PORT);
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
