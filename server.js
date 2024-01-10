@@ -18,8 +18,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: process.env.FRONTEND_URL, // Remplacez par l'URL de votre front-end
-        methods: ["GET", "POST"]
+        origin: "https://spotify-front-liard.vercel.app", // Remplacez par l'URL de votre front-end
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
     }
 });
 
